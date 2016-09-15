@@ -1,141 +1,165 @@
-# PokemonGo-Auto-Pokestop - a python pokemon script can research your poke stops
+# PokemonGo-Bot
+[PokemonGo-Bot](https://github.com/PokemonGoF/PokemonGo-Bot) is a project created by the [PokemonGoF](https://github.com/PokemonGoF) team.
 
+## Table of Contents
+- [Installation](https://github.com/PokemonGoF/PokemonGo-Bot/blob/dev/docs/installation.md)
+- [Documentation](https://github.com/PokemonGoF/PokemonGo-Bot/blob/dev/docs/)
+- [Support](#support)
+ - [Help](#configuration-issueshelp)
+ - [Bugs](#bugs--issues)
+ - [Feature Requests](#feature-requests)
+ - [Pull Requests](#pull-requests)
+- [Features](#features)
+- [Credits](#credits)
 
+The project is currently setup in two main branches:
+- `dev` also known as `beta` - This is where the latest features are, but you may also experience some issues with stability/crashes.
+- `master` also known as `stable` - The bot 'should' be stable on this branch, and is generally well tested.
 
-# The works are based on the Pokemon Go API
+## Support
+### Development Channel
+[![Join the chat at https://gitter.im/pikabot-org/Lobby](https://badges.gitter.im/pikabot-org/db.svg)](https://gitter.im/pikabot-org/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+### Configuration issues/help
+If you need any help please don't create an issue as we have a great community on Slack. You can count on the community in [#help](https://pokemongo-bot.slack.com/messages/help/) channel.
+ - [Click here to signup (first time only)](https://pokemongo-bot.herokuapp.com)
+ - [Join here if you're already a member](https://pokemongo-bot.slack.com/messages/general/)
 
+###[Bugs / Issues](https://github.com/PokemonGoF/PokemonGo-Bot/issues?q=is%3Aissue+sort%3Aupdated-desc)
+If you discover a bug in the bot, please [search our issue tracker](https://github.com/PokemonGoF/PokemonGo-Bot/issues?q=is%3Aissue+sort%3Aupdated-desc) first. If it hasn't been reported, please [create a new issue](https://github.com/PokemonGoF/PokemonGo-Bot/issues/new) and ensure you follow the template guide so that our team can assist you as quickly as possible.
 
+###[Feature Requests](https://github.com/PokemonGoF/PokemonGo-Bot/labels/Feature%20Request)
+If you have a great idea to improve the bot, please [search our feature tracker](https://github.com/PokemonGoF/PokemonGo-Bot/labels/Feature%20Request) first to ensure someone else hasn't already come up with the same great idea.  If it hasn't been requested, please [create a new request](https://github.com/PokemonGoF/PokemonGo-Bot/issues/new) and ensure you follow the template guide so that it doesnt get lost with the bug reports.
+While you're there vote on other feature requests to let the devs know what is most important to you.
 
-pgoapi is a client/api/demo for Pokemon Go by https://github.com/tejado.  
-It allows automatic parsing of requests/responses by finding the correct protobuf objects over a naming convention and will return the response in a parsed python dictionary format.   
+###[Pull Requests](https://github.com/PokemonGoF/PokemonGo-Bot/pulls)
+If you'd like to make your own changes, make sure you follow the pull request template, and ensure your PR is made against the 'dev' branch
 
- * This is unofficial - USE AT YOUR OWN RISK !
- * I don't play pokemon go !
- * No bot/farming code included !
+## Features
+- [x] GPS Location configuration
+- [x] Search Pokestops
+- [x] Catch Pokemon
+- [x] Determine which pokeball to use (uses Razz Berry if the catch percentage is low!)
+- [x] Exchange Pokemon as per configuration
+- [x] Evolve Pokemon as per configuration
+- [x] Auto switch mode (Inventory Checks - switches between catch/farming items)
+- [x] Limit the step to farm specific area for pokestops
+- [x] Rudimentary IV Functionality filter
+- [x] Ignore certain pokemon filter
+- [x] Adjust delay between Pokemon capture & Transfer as per configuration
+- [x] Hatch eggs
+- [x] Incubate eggs
+- [x] Crowd Sourced Map Prototype
+- [ ] [Standalone Desktop Application] (https://github.com/PokemonGoF/PokemonGo-Bot-Desktop)
+- [ ] Use candy
 
-## Supports
- * Google/PTC auth
- * Address parsing for GPS coordinates
- * Allows chaining of RPC calls
- * Good logging/debugging possibilities
- * Easy extension of further calls! No source code change required!
- * Following RPC calls:
-   * GET_PLAYER
-   * GET_INVENTORY
-   * GET_MAP_OBJECTS
-   * DOWNLOAD_SETTINGS
-   * DOWNLOAD_ITEM_TEMPLATES
-   * CHECK_AWARDED_BADGES
-   * FORT_SEARCH (spinning of pokestops)
-   * RELEASE_POKEMON (release pokemon and get candy/xp)
-   * EVOLVE_POKEMON
- 
-## Usage
+## Gym Battles
+[PokemonGo-Bot](https://github.com/PokemonGoF/PokemonGo-Bot) takes a strong stance against automating gym battles. Botting gyms will have a negative effect on most players and thus the game as a whole. We will thus never accept contributions or changes containing code specific for gym battles.
 
-### pokecli
-    usage: pokecli.py [-h] -a AUTH_SERVICE -u USERNAME -p PASSWORD -l LOCATION [-d] [-t]
+## Analytics
+[PokemonGo-Bot](https://github.com/PokemonGoF/PokemonGo-Bot) is very popular and has a vibrant community. Because of that, it has become very difficult for us to know how the bot is used and what errors people hit. By capturing small amounts of data, we can prioritize our work better such as fixing errors that happen to a large percentage of our user base, not just a vocal minority.
 
-    optional arguments:
-      -h, --help                                    show this help message and exit
-      -a AUTH_SERVICE, --auth_service AUTH_SERVICE  Auth Service ('ptc' or 'google')
-      -u USERNAME, --username USERNAME              Username
-      -p PASSWORD, --password PASSWORD              Password
-      -l LOCATION, --location LOCATION              Location
-      -d, --debug                                   Debug Mode
-      -t, --test                                    Only parse the specified location
+Our goal is to help inform our decisions by capturing data that helps us get aggregate usage and error reports, not personal information. To view the code that handles analytics in our master branch, you can use this [search link](https://github.com/PokemonGoF/PokemonGo-Bot/search?utf8=%E2%9C%93&q=BotEvent).
 
+If there are any concerns with this policy or you believe we are tracking something we shouldn't, please open a ticket in the tracker. The contributors always intend to do the right thing for our users, and we want to make sure we are held to that path.
 
-### pokecli demo
+If you do not want any data to be gathered, you can turn off this feature by setting `health_record` to `false` in your `config.json`.
 
-    $ python2 pokecli.py -a ptc -u tejado -p 1234 --location "New York, Washington Square"
-    2016-07-19 01:22:14,806 [   pokecli] [ INFO] Your given location: Washington Square, Greenwich, NY 12834, USA
-    2016-07-19 01:22:14,806 [   pokecli] [ INFO] lat/long/alt: 43.0909305 -73.4989367 0.0
-    2016-07-19 01:22:14,808 [  auth_ptc] [ INFO] Login for: tejado
-    2016-07-19 01:22:15,584 [  auth_ptc] [ INFO] PTC Login successful
-    2016-07-19 01:22:15,584 [    pgoapi] [ INFO] Starting RPC login sequence (app simulation)
-    2016-07-19 01:22:15,584 [    pgoapi] [ INFO] Create new request...
-    2016-07-19 01:22:15,584 [    pgoapi] [ INFO] Adding 'GET_PLAYER' to RPC request
-    2016-07-19 01:22:15,584 [    pgoapi] [ INFO] Adding 'GET_HATCHED_EGGS' to RPC request
-    2016-07-19 01:22:15,584 [    pgoapi] [ INFO] Adding 'GET_INVENTORY' to RPC request
-    2016-07-19 01:22:15,584 [    pgoapi] [ INFO] Adding 'CHECK_AWARDED_BADGES' to RPC request
-    2016-07-19 01:22:15,584 [    pgoapi] [ INFO] Adding 'DOWNLOAD_SETTINGS' to RPC request including arguments
-    2016-07-19 01:22:15,585 [    pgoapi] [ INFO] Execution of RPC
-    2016-07-19 01:22:16,259 [    pgoapi] [ INFO] Cleanup of request!
-    2016-07-19 01:22:16,259 [    pgoapi] [ INFO] Finished RPC login sequence (app simulation)
-    2016-07-19 01:22:16,259 [    pgoapi] [ INFO] Login process completed
-    2016-07-19 01:22:16,259 [    pgoapi] [ INFO] Create new request...
-    2016-07-19 01:22:16,259 [    pgoapi] [ INFO] Adding 'GET_PLAYER' to RPC request
-    2016-07-19 01:22:16,259 [    pgoapi] [ INFO] Execution of RPC
-    2016-07-19 01:22:16,907 [    pgoapi] [ INFO] Cleanup of request!
-    Response dictionary:
-    ...
-          "profile": {
-            "username": "tejado",
-            "item_storage": 350,
-            "unknown12": "",
-            "unknown13": "",
-            "creation_time": 1468139...,
-            "currency": [
-              {
-                "type": "POKECOIN"
-              },
-              {
-                "amount": 400,
-                "type": "STARDUST"
-              }
-            ],
-            "daily_bonus": {},
-            "avatar": {
-              "unknown2": 1,
-              "unknown3": 4,
-              "unknown9": 2,
-              "unknown10": 1
-            },
-            "tutorial": "AAEDBAc=\n",
-            "poke_storage": 250
-          },
-    ...
-
-## pgoapi extension
-All (known) RPC calls against the original Pokemon Go servers are listed in the RequestMethod Enum in the pgoapi/protos/RpcEnum.proto file. These can be executed over the name, e.g. the call for get_player is:
-
-    api = PGoApi()
-    ...
-    api.get_player()
-    api.call()
-    
-The pgoapi will send this as a RPC request and tries to parse the response over a protobuf object with the same name (get_player) converted to CamelCase + 'Response'. In our example, it would be 'GetPlayerResponse'. These protobuf definitions have to be inside RpcSub (pgoapi/protos/RpcSub.proto).
-
-If a request needs parameters, they can be added as arguments and pgoapi will try to add them automatically to the request, e.g.:
-
-    *RpcSub.proto:*
-    message DownloadSettingsRequest {
-      optional string hash = 1;
-    }
-    
-    *python:*
-    api = PGoApi()
-    ...
-    api.download_settings(hash="4a2e9bc330dae60e7b74fc85b98868ab4700802e")
-    api.call()
-
-    
-## Requirements
- * Python 2
- * requests
- * protobuf
- * gpsoauth
- * geopy (only for pokecli demo)
- * s2sphere (only for pokecli demo)
- 
-    
 ## Credits
-[Mila432](https://github.com/Mila432/Pokemon_Go_API) for the login secrets  
-[elliottcarlson](https://github.com/elliottcarlson) for the Google Auth PR  
-[AeonLucid](https://github.com/AeonLucid/POGOProtos) for improved protos  
-[AHAAAAAAA](https://github.com/AHAAAAAAA/PokemonGo-Map) for parts of the s2sphere stuff
+- [tejado](https://github.com/tejado) many thanks for the API
+- [U6 Group](http://pgoapi.com) for the U6
+- [Mila432](https://github.com/Mila432/Pokemon_Go_API) for the login secrets
+- [elliottcarlson](https://github.com/elliottcarlson) for the Google Auth PR
+- [AeonLucid](https://github.com/AeonLucid/POGOProtos) for improved protos
+- [AHAAAAAAA](https://github.com/AHAAAAAAA/PokemonGo-Map) for parts of the s2sphere stuff
+- [Breeze ro](https://github.com/BreezeRo) for some of the MQTT/Map stuff
 
-## Ports
-[C# Port](https://github.com/BclEx/pokemongo-api-demo.net) by BclEx  
-[Node Port](https://github.com/Armax/Pokemon-GO-node-api) by Arm4x  
+## Contributors
+ * eggins [first pull request]
+ * crack00r
+ * ethervoid
+ * Bashin
+ * tstumm
+ * TheGoldenXY
+ * Reaver01
+ * rarshonsky
+ * earthchie
+ * haykuro
+ * 05-032
+ * sinistance
+ * CapCap
+ * mzupan
+ * gnekic(GeXx)
+ * Shoh
+ * luizperes
+ * brantje
+ * VirtualSatai
+ * dmateusp
+ * jtdroste
+ * msoedov
+ * Grace
+ * Calcyfer
+ * asaf400
+ * guyz
+ * DavidK1m
+ * budi-khoirudin
+ * riberod07
+ * th3w4y
+ * Leaklessgfy
+ * steffwiz
+ * pulgalipe
+ * BartKoppelmans
+ * phil9l
+ * VictorChen
+ * AlvaroGzP
+ * fierysolid
+ * surfaace
+ * surceis
+ * SpaceWhale
+ * klingan
+ * reddivision
+ * DayBr3ak
+ * kbinani
+ * mhdasding
+ * MFizz
+ * NamPNQ
+ * z4ppy.bbc
+ * matheussampaio
+ * Abraxas000
+ * lucasfevi
+ * pokepal
+ * Moonlight-Angel
+ * mjmadsen
+ * nikofil
+ * bigkraig
+ * nikhil-pandey
+ * thebigjc
+ * JaapMoolenaar
+ * eevee-github
+ * g0vanish
+ * cmezh
+ * Nivong
+ * kestel
+ * simonsmh
+ * joaodragao
+ * extink
+ * Quantra
+ * pmquan
+ * net8q
+ * SyncX
+ * umbreon222
+ * DeXtroTip
+ * rawgni
+ * Breeze Ro
+ * bruno-kenji
+
+## Disclaimer
+©2016 Niantic, Inc. ©2016 Pokémon. ©1995–2016 Nintendo / Creatures Inc. / GAME FREAK inc. © 2016 Pokémon/Nintendo Pokémon and Pokémon character names are trademarks of Nintendo. The Google Maps Pin is a trademark of Google Inc. and the trade dress in the product design is a trademark of Google Inc. under license to The Pokémon Company. Other trademarks are the property of their respective owners.
+[Privacy Policy](http://www.pokemon.com/us/privacy-policy/)
+
+[PokemonGo-Bot](https://github.com/PokemonGoF/PokemonGo-Bot) is intended for academic purposes and should not be used to play the game *PokemonGo* as it violates the TOS and is unfair to the community. Use the bot **at your own risk**.
+
+[PokemonGoF](https://github.com/PokemonGoF) does not support the use of 3rd party apps or apps that violate the TOS.
+
+
+[![Analytics](https://ga-beacon.appspot.com/UA-81468120-1/welcome-page-master)](https://github.com/igrigorik/ga-beacon)

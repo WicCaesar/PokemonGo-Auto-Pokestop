@@ -1,0 +1,12 @@
+.idea
+.git*
+**/*config.json
+**/*userdata.js
+data/caught-*.json
+data/cells-*.json
+data/deviceid-*.txt
+data/last-location-*.json
+data/*.db
+web/catchable-*.json
+web/inventory-*.json
+web/location-*.json
